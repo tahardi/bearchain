@@ -22,6 +22,23 @@ contract FactorsVerifierTest is RiscZeroCheats, Test {
         factorsVerifier = new FactorsVerifier(riscZeroVerifier, IMAGE_ID);
     }
 
+    function test_FactorsVerifier() public view {
+        assertEq(factorsVerifier.imageId(), IMAGE_ID);
+        assertEq(address(factorsVerifier.RISC_ZERO_VERIFIER()), address(riscZeroVerifier));
+    }
+
+    function test_setImageId() public {
+        // given
+        bytes32 newImageId = hex"2bda51ae4f0326636e89480a383a770f713d514f76f6d58a5c2d1373b6b87d48";
+
+        vm.prank(owner);
+        vm.expectEmit(true, false, false, true);
+        emit FactorsVerifier.ImageIdUpdated(newImageId);
+
+        // when/then
+        factorsVerifier.setImageId(newImageId);
+    }
+
     function test_verify() public {
         // given
         uint64 product = 4;

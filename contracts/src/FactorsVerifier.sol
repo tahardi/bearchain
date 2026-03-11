@@ -2,8 +2,8 @@ pragma solidity ^0.8.33;
 
 import {IRiscZeroVerifier} from "@risc0-ethereum/IRiscZeroVerifier.sol";
 
-// This contract verifies RISC Zero proofs that prove some user knows some
-// factors a and b that when multiplied together produce product c.
+// This contract verifies RISC Zero proofs that prove the knowledge of some
+// factors a and b that when multiplied together produce c.
 contract FactorsVerifier {
     address public immutable OWNER;
     bytes32 public imageId;

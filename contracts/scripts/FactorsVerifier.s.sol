@@ -12,13 +12,19 @@ contract FactorsVerifierScript is Script {
     function setUp() public {}
 
     function run() public {
-        bytes32 zkvmImageId = hex"2bda51ae4f0326636e89480a383a770f713d514f76f6d58a5c2d1373b6b87d48";
-        //        bytes32 zkvmImageId = vm.envBytes32("ZK_VM_IMAGE_ID");
+        // This is taken from:
+        // bearclave-contracts/test/integration/factors-verifier/testdata/groth16.json
+        //
+        // It represents a specific version of the bearclave-zkvm/factors-verifier
+        // program. This must be updated if the groth16 testdata gets updated.
+        // That, or the test should explicitly call setImageId to ensure the
+        // right imageId is being used to verify a given Groth16 seal.
+        bytes32 imageId = hex"2bda51ae4f0326636e89480a383a770f713d514f76f6d58a5c2d1373b6b87d48";
 
         vm.startBroadcast();
         IRiscZeroVerifier riscZeroVerifier =
             new RiscZeroGroth16Verifier(ControlID.CONTROL_ROOT, ControlID.BN254_CONTROL_ID);
-        factorsVerifier = new FactorsVerifier(riscZeroVerifier, zkvmImageId);
+        factorsVerifier = new FactorsVerifier(riscZeroVerifier, imageId);
         vm.stopBroadcast();
     }
 }
