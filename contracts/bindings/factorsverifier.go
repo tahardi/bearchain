@@ -31,7 +31,7 @@ var (
 
 // FactorsVerifierMetaData contains all meta data concerning the FactorsVerifier contract.
 var FactorsVerifierMetaData = &bind.MetaData{
-	ABI: "[{\"type\":\"constructor\",\"inputs\":[{\"name\":\"_riscZeroVerifier\",\"type\":\"address\",\"internalType\":\"contractIRiscZeroVerifier\"},{\"name\":\"_imageId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"OWNER\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"address\",\"internalType\":\"address\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"RISC_ZERO_VERIFIER\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"address\",\"internalType\":\"contractIRiscZeroVerifier\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"imageId\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"setImageId\",\"inputs\":[{\"name\":\"_imageId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"verify\",\"inputs\":[{\"name\":\"product\",\"type\":\"uint64\",\"internalType\":\"uint64\"},{\"name\":\"seal\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"event\",\"name\":\"DebugVerification\",\"inputs\":[{\"name\":\"sealSelector\",\"type\":\"bytes4\",\"indexed\":false,\"internalType\":\"bytes4\"},{\"name\":\"expectedSelector\",\"type\":\"bytes4\",\"indexed\":false,\"internalType\":\"bytes4\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"FactorsKnownForProduct\",\"inputs\":[{\"name\":\"product\",\"type\":\"uint256\",\"indexed\":true,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"ImageIdUpdated\",\"inputs\":[{\"name\":\"newImageId\",\"type\":\"bytes32\",\"indexed\":true,\"internalType\":\"bytes32\"}],\"anonymous\":false}]",
+	ABI: "[{\"type\":\"constructor\",\"inputs\":[{\"name\":\"_riscZeroVerifier\",\"type\":\"address\",\"internalType\":\"contractIRiscZeroVerifier\"},{\"name\":\"_imageId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"OWNER\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"address\",\"internalType\":\"address\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"RISC_ZERO_VERIFIER\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"address\",\"internalType\":\"contractIRiscZeroVerifier\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"imageId\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"setImageId\",\"inputs\":[{\"name\":\"_imageId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"verify\",\"inputs\":[{\"name\":\"product\",\"type\":\"uint64\",\"internalType\":\"uint64\"},{\"name\":\"seal\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"event\",\"name\":\"DebugVerification\",\"inputs\":[{\"name\":\"sealSelector\",\"type\":\"bytes4\",\"indexed\":false,\"internalType\":\"bytes4\"},{\"name\":\"expectedSelector\",\"type\":\"bytes4\",\"indexed\":false,\"internalType\":\"bytes4\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"FactorsKnownForProduct\",\"inputs\":[{\"name\":\"product\",\"type\":\"uint64\",\"indexed\":true,\"internalType\":\"uint64\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"ImageIdUpdated\",\"inputs\":[{\"name\":\"newImageId\",\"type\":\"bytes32\",\"indexed\":true,\"internalType\":\"bytes32\"}],\"anonymous\":false}]",
 }
 
 // FactorsVerifierABI is the input ABI used to generate the binding from.
@@ -519,14 +519,14 @@ func (it *FactorsVerifierFactorsKnownForProductIterator) Close() error {
 
 // FactorsVerifierFactorsKnownForProduct represents a FactorsKnownForProduct event raised by the FactorsVerifier contract.
 type FactorsVerifierFactorsKnownForProduct struct {
-	Product *big.Int
+	Product uint64
 	Raw     types.Log // Blockchain specific contextual infos
 }
 
-// FilterFactorsKnownForProduct is a free log retrieval operation binding the contract event 0xff03fafd2ed5081c52e464f728857ab499726c34e6251b26c221bc24af455886.
+// FilterFactorsKnownForProduct is a free log retrieval operation binding the contract event 0x08b620c727b9819c2bd9420a0bd3cdc6a9c4ef4cde2d5730fae682a346248b72.
 //
-// Solidity: event FactorsKnownForProduct(uint256 indexed product)
-func (_FactorsVerifier *FactorsVerifierFilterer) FilterFactorsKnownForProduct(opts *bind.FilterOpts, product []*big.Int) (*FactorsVerifierFactorsKnownForProductIterator, error) {
+// Solidity: event FactorsKnownForProduct(uint64 indexed product)
+func (_FactorsVerifier *FactorsVerifierFilterer) FilterFactorsKnownForProduct(opts *bind.FilterOpts, product []uint64) (*FactorsVerifierFactorsKnownForProductIterator, error) {
 
 	var productRule []interface{}
 	for _, productItem := range product {
@@ -540,10 +540,10 @@ func (_FactorsVerifier *FactorsVerifierFilterer) FilterFactorsKnownForProduct(op
 	return &FactorsVerifierFactorsKnownForProductIterator{contract: _FactorsVerifier.contract, event: "FactorsKnownForProduct", logs: logs, sub: sub}, nil
 }
 
-// WatchFactorsKnownForProduct is a free log subscription operation binding the contract event 0xff03fafd2ed5081c52e464f728857ab499726c34e6251b26c221bc24af455886.
+// WatchFactorsKnownForProduct is a free log subscription operation binding the contract event 0x08b620c727b9819c2bd9420a0bd3cdc6a9c4ef4cde2d5730fae682a346248b72.
 //
-// Solidity: event FactorsKnownForProduct(uint256 indexed product)
-func (_FactorsVerifier *FactorsVerifierFilterer) WatchFactorsKnownForProduct(opts *bind.WatchOpts, sink chan<- *FactorsVerifierFactorsKnownForProduct, product []*big.Int) (event.Subscription, error) {
+// Solidity: event FactorsKnownForProduct(uint64 indexed product)
+func (_FactorsVerifier *FactorsVerifierFilterer) WatchFactorsKnownForProduct(opts *bind.WatchOpts, sink chan<- *FactorsVerifierFactorsKnownForProduct, product []uint64) (event.Subscription, error) {
 
 	var productRule []interface{}
 	for _, productItem := range product {
@@ -582,9 +582,9 @@ func (_FactorsVerifier *FactorsVerifierFilterer) WatchFactorsKnownForProduct(opt
 	}), nil
 }
 
-// ParseFactorsKnownForProduct is a log parse operation binding the contract event 0xff03fafd2ed5081c52e464f728857ab499726c34e6251b26c221bc24af455886.
+// ParseFactorsKnownForProduct is a log parse operation binding the contract event 0x08b620c727b9819c2bd9420a0bd3cdc6a9c4ef4cde2d5730fae682a346248b72.
 //
-// Solidity: event FactorsKnownForProduct(uint256 indexed product)
+// Solidity: event FactorsKnownForProduct(uint64 indexed product)
 func (_FactorsVerifier *FactorsVerifierFilterer) ParseFactorsKnownForProduct(log types.Log) (*FactorsVerifierFactorsKnownForProduct, error) {
 	event := new(FactorsVerifierFactorsKnownForProduct)
 	if err := _FactorsVerifier.contract.UnpackLog(event, "FactorsKnownForProduct", log); err != nil {

@@ -9,7 +9,7 @@ contract FactorsVerifier {
     bytes32 public imageId;
     IRiscZeroVerifier public immutable RISC_ZERO_VERIFIER;
 
-    event FactorsKnownForProduct(uint256 indexed product);
+    event FactorsKnownForProduct(uint64 indexed product);
     event ImageIdUpdated(bytes32 indexed newImageId);
     event DebugVerification(bytes4 sealSelector, bytes4 expectedSelector);
 
