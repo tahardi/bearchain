@@ -4,3 +4,7 @@
 [submodule "contracts/libs/openzeppelin-contracts"]
 	path = contracts/libs/openzeppelin-contracts
 	url = https://github.com/OpenZeppelin/openzeppelin-contracts
+[submodule "contracts/libs/risc0-ethereum"]
+	path = contracts/libs/risc0-ethereum
+	url = https://github.com/risc0/risc0-ethereum
+	branch = v3.0.1

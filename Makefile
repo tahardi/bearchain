@@ -77,8 +77,22 @@ sol-sec:
 	@slither $(src_dir) --config-file .slither-config.json
 
 .PHONY: sol-test
-sol-test: sol-build
-	@forge test -vvv
+sol-test: \
+	sol-test-bear-coin \
+	sol-test-hello-world \
+	sol-test-factors-verifier
+
+.PHONY: sol-test-bear-coin
+sol-test-bear-coin: sol-build
+	@forge test -vvv --match-contract "BearCoinTest"
+
+.PHONY: sol-test-hello-world
+sol-test-hello-world: sol-build
+	@forge test -vvv --match-contract "HelloWorldTest"
+
+.PHONY: sol-test-factors-verifier
+sol-test-factors-verifier: sol-build
+	@forge test -vvv --match-contract "FactorsVerifier"
 
 ################################################################################
 # Shared Targets
@@ -90,7 +104,8 @@ integration_dir=./test/integration
 .PHONY: bindings
 bindings: \
 	bindings-bear-coin \
-	bindings-hello-world
+	bindings-hello-world \
+	bindings-factors-verifier
 
 .PHONY: bindings-bear-coin
 bindings-bear-coin: sol-build
@@ -110,10 +125,20 @@ bindings-hello-world: sol-build
 		--type HelloWorld \
 		--out $(bindings_dir)/helloworld.go
 
+.PHONY: bindings-factors-verifier
+bindings-factors-verifier: sol-build
+	@jq '.abi' $(out_dir)/FactorsVerifier.sol/FactorsVerifier.json | \
+	abigen \
+		--abi /dev/stdin \
+		--pkg $(bindings_pkg) \
+		--type FactorsVerifier \
+		--out $(bindings_dir)/factorsverifier.go
+
 .PHONY: test-integration
 test-integration: \
 	test-integration-bear-coin \
-	test-integration-hello-world
+	test-integration-hello-world \
+	test-integration-factors-verifier
 
 .PHONY: test-integration-bear-coin
 test-integration-bear-coin: sol-build tidy
@@ -122,6 +147,10 @@ test-integration-bear-coin: sol-build tidy
 .PHONY: test-integration-hello-world
 test-integration-hello-world: sol-build tidy
 	@go test -v -count=1 $(integration_dir)/hello-world/...
+
+.PHONY: test-integration-factors-verifier
+test-integration-factors-verifier: sol-build tidy
+	@go test -v -count=1 $(integration_dir)/factors-verifier/...
 
 .PHONY: clean
 clean:
