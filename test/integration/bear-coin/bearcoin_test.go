@@ -101,11 +101,12 @@ func TestBearCoin_Burn(t *testing.T) {
 		requireBalance(t, contract, owner, totalSupply())
 
 		// when
-		_, err := burn(t, anvil, contract, owner, burnAmount)
+		receipt, err := burn(t, anvil, contract, owner, burnAmount)
 
 		// then
 		require.NoError(t, err)
 		requireBalance(t, contract, owner, totalSupply().Sub(totalSupply(), burnAmount))
+		requireBurnEvent(t, contract, receipt, owner.Address(), burnAmount)
 	})
 
 	t.Run("happy path - other burn", func(t *testing.T) {
@@ -125,11 +126,12 @@ func TestBearCoin_Burn(t *testing.T) {
 		requireBalance(t, contract, other, amount)
 
 		// when
-		_, err = burn(t, anvil, contract, other, amount)
+		receipt, err := burn(t, anvil, contract, other, amount)
 
 		// then
 		require.NoError(t, err)
 		requireBalance(t, contract, other, nil)
+		requireBurnEvent(t, contract, receipt, other.Address(), amount)
 	})
 
 	t.Run("error - burn amount greater than supply", func(t *testing.T) {
@@ -185,11 +187,12 @@ func TestBearCoin_Mint(t *testing.T) {
 		requireBalance(t, contract, owner, totalSupply().Sub(totalSupply(), amount))
 
 		// when
-		_, err = mint(t, anvil, contract, owner, owner, amount)
+		receipt, err := mint(t, anvil, contract, owner, owner, amount)
 
 		// then
 		require.NoError(t, err)
 		requireBalance(t, contract, owner, totalSupply())
+		requireMintEvent(t, contract, receipt, owner.Address(), amount)
 	})
 
 	t.Run("happy path - owner mint-to-other", func(t *testing.T) {
@@ -208,11 +211,12 @@ func TestBearCoin_Mint(t *testing.T) {
 		requireBalance(t, contract, other, nil)
 
 		// when
-		_, err = mint(t, anvil, contract, owner, other, amount)
+		receipt, err := mint(t, anvil, contract, owner, other, amount)
 
 		// then
 		require.NoError(t, err)
 		requireBalance(t, contract, other, amount)
+		requireMintEvent(t, contract, receipt, other.Address(), amount)
 	})
 
 	t.Run("error - only owner can mint", func(t *testing.T) {

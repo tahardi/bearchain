@@ -5,10 +5,12 @@ import (
 	"testing"
 
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
+	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/stretchr/testify/require"
 	"github.com/tahardi/bearchain/contracts/bindings"
 	"github.com/tahardi/bearchain/test/foundry"
+	"github.com/tahardi/bearchain/test/integration"
 )
 
 func approve(
@@ -146,6 +148,52 @@ func requireMaxUint256(t *testing.T) *big.Int {
 		)
 	require.True(t, ok)
 	return maxUint256
+}
+
+func requireBurnEvent(
+	t *testing.T,
+	contract *bindings.BearCoin,
+	receipt *types.Receipt,
+	from common.Address,
+	amount *big.Int,
+) {
+	t.Helper()
+	for _, log := range receipt.Logs {
+		event, err := contract.ParseBurn(*log)
+		if err == nil {
+			integration.AssertAddressesEqual(t, from, event.From)
+			if amount == nil {
+				require.Equal(t, 0, event.Amount.Cmp(big.NewInt(0)))
+			} else {
+				require.Equal(t, amount, event.Amount)
+			}
+			return
+		}
+	}
+	t.Fatalf("expected Burn event but none was found")
+}
+
+func requireMintEvent(
+	t *testing.T,
+	contract *bindings.BearCoin,
+	receipt *types.Receipt,
+	to common.Address,
+	amount *big.Int,
+) {
+	t.Helper()
+	for _, log := range receipt.Logs {
+		event, err := contract.ParseMint(*log)
+		if err == nil {
+			integration.AssertAddressesEqual(t, to, event.To)
+			if amount == nil {
+				require.Equal(t, 0, event.Amount.Cmp(big.NewInt(0)))
+			} else {
+				require.Equal(t, amount, event.Amount)
+			}
+			return
+		}
+	}
+	t.Fatalf("expected Mint event but none was found")
 }
 
 func totalSupply() *big.Int {
