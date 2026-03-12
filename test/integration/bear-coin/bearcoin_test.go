@@ -7,7 +7,7 @@ import (
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"github.com/tahardi/bearchain/test/integration"
+	"github.com/tahardi/bearclave-contracts/test/integration"
 )
 
 const (

@@ -5,6 +5,6 @@ pkgname: mocks
 formatter: goimports
 log-level: info
 packages:
-  github.com/tahardi/bearchain:
+  github.com/tahardi/bearclave-contracts:
     config:
     interfaces:

@@ -6,7 +6,7 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"github.com/tahardi/bearchain/test/foundry"
+	"github.com/tahardi/bearclave-contracts/test/foundry"
 )
 
 const (
