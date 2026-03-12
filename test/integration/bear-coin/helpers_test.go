@@ -8,9 +8,9 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/stretchr/testify/require"
-	"github.com/tahardi/bearchain/contracts/bindings"
-	"github.com/tahardi/bearchain/test/foundry"
-	"github.com/tahardi/bearchain/test/integration"
+	"github.com/tahardi/bearclave-contracts/contracts/bindings"
+	"github.com/tahardi/bearclave-contracts/test/foundry"
+	"github.com/tahardi/bearclave-contracts/test/integration"
 )
 
 func approve(

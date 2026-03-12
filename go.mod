@@ -1,4 +1,4 @@
-module github.com/tahardi/bearchain
+module github.com/tahardi/bearclave-contracts
 
 go 1.25.5
 

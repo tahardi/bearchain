@@ -1,4 +1,4 @@
-module github.com/tahardi/bearchain/golangci-lint
+module github.com/tahardi/bearclave-contracts/golangci-lint
 
 go 1.25.5
 
